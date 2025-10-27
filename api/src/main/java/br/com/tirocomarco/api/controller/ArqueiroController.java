@@ -60,4 +60,30 @@ public class ArqueiroController {
         arqueiroRepository.deleteById(id); // Deleta o arqueiro do banco de dados.
         return ResponseEntity.noContent().build(); // Retorna 204 No Content para indicar que a deleção foi bem-sucedida.
     }
+
+    @PatchMapping("{id}") // Mapeia requisições PATCH que contenham um ID na URL.
+    public ResponseEntity<Arqueiro> atualizarParcial(@PathVariable Long id, @RequestBody Arqueiro dadosParciais) {
+        // Usa o findById para buscar o arqueiro existente e retorna um Optional.
+        return arqueiroRepository.findById(id).map(arqueiroExistente -> {
+
+            // Verifica cada campo dos dados recebidos. Se não for nulo, atualiza o campo correspondente.
+            if (dadosParciais.getNome() != null) {
+                arqueiroExistente.setNome(dadosParciais.getNome());
+            }
+            if (dadosParciais.getDataNascimento() != null) {
+                arqueiroExistente.setDataNascimento(dadosParciais.getDataNascimento());
+            }
+            if (dadosParciais.getCategoria() != null) {
+                arqueiroExistente.setCategoria(dadosParciais.getCategoria());
+            }
+            if (dadosParciais.getClube() != null) {
+                arqueiroExistente.setClube(dadosParciais.getClube());
+            }
+
+            // Salva o arqueiro com os campos atualizados.
+            Arqueiro arqueiroAtualizado = arqueiroRepository.save(arqueiroExistente);
+            return ResponseEntity.ok(arqueiroAtualizado);
+
+        }).orElse(ResponseEntity.notFound().build()); // Se o findById não encontrar nada, retorna 404.
+    }
 }
