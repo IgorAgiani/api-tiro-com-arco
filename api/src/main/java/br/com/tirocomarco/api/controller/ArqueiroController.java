@@ -3,9 +3,7 @@ package br.com.tirocomarco.api.controller;
 import br.com.tirocomarco.api.model.Arqueiro;
 import br.com.tirocomarco.api.repository.ArqueiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class ArqueiroController {
     @GetMapping // Mapeia requisições GET.
     public List<Arqueiro> listarTodos() {
         return arqueiroRepository.findAll(); // Retorna todos os arqueiros do banco de dados.
+    }
+
+    @PostMapping // Mapeia requisições POST.
+    public Arqueiro criarArqueiro(@RequestBody Arqueiro arqueiro) { // @RequestBody, converte o JSON do corpo da requisição em um objeto Arqueiro.
+        return arqueiroRepository.save(arqueiro); // Salva um novo arqueiro no banco de dados.
     }
 }
