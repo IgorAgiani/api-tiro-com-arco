@@ -26,7 +26,7 @@ public class ArqueiroController {
         return arqueiroRepository.save(arqueiro); // Salva um novo arqueiro no banco de dados.
     }
 
-    @GetMapping("{id}") // Mapeie requisição para uma parte variável da URL.
+    @GetMapping("{id}") // Mapeia requisições GET que contenham um ID na URL
     public ResponseEntity<Arqueiro> buscarPorId(@PathVariable Long id) {
         // ResponseEntity  para melhor controle total sobre a resposta HTTP
         // @PathVariable, extrai o ID da URL.
@@ -38,5 +38,17 @@ public class ArqueiroController {
             // Se não foi encontrado, retorna 404 Not Found sem corpo.
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("{id}") // Mapeia requisições PUT que contenham um ID na URL.
+    public ResponseEntity<Arqueiro> atualizarArqueiro(@PathVariable Long id, @RequestBody Arqueiro arqueiroAtualizado) {
+        if (!arqueiroRepository.existsById(id)) { // Verifica se o arqueiro com o ID fornecido existe.
+            return ResponseEntity.notFound().build(); // Retorna 404 Not Found se o arqueiro não existir.
+        }
+
+        arqueiroAtualizado.setId(id); // Garante que o ID do arqueiro atualizado seja o mesmo.
+
+        Arqueiro salvo = arqueiroRepository.save(arqueiroAtualizado); // Salva as alterações no banco de dados.
+        return ResponseEntity.ok(salvo); // Retorna 200 OK com o arqueiro atualizado.
     }
 }
