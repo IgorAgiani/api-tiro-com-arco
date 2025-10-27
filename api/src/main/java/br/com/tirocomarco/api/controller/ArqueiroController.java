@@ -51,4 +51,13 @@ public class ArqueiroController {
         Arqueiro salvo = arqueiroRepository.save(arqueiroAtualizado); // Salva as alterações no banco de dados.
         return ResponseEntity.ok(salvo); // Retorna 200 OK com o arqueiro atualizado.
     }
+
+    @DeleteMapping("{id}") // Mapeia requisições DELETE que contenham um ID na URL.
+    public ResponseEntity<Void> deletarArqueiro(@PathVariable Long id) {
+        if (!arqueiroRepository.existsById(id)) { // Verifica se o arqueiro com o ID fornecido existe.
+            return ResponseEntity.notFound().build(); // Retorna 404 Not Found se o arqueiro não existir.
+        }
+        arqueiroRepository.deleteById(id); // Deleta o arqueiro do banco de dados.
+        return ResponseEntity.noContent().build(); // Retorna 204 No Content para indicar que a deleção foi bem-sucedida.
+    }
 }
