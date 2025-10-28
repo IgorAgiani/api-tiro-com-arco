@@ -21,17 +21,20 @@ public class ApiApplication {
     CommandLineRunner initDatabase(ArqueiroRepository arqueiroRepository) {
         return args -> {
 
-            Arqueiro arq1 = new Arqueiro();
-            arq1.setNome("Igor Agiani Silva");
-            arq1.setDataNascimento(LocalDate.of(1994, 6, 17));
-            arq1.setCategoria("Composto Open Paralimpico");
-            arq1.setClube("LA Archery - São Paulo (SP)");
+            arqueiroRepository.deleteAll(); // Limpa o banco antes de inserir para evitar duplicatas a cada reinicialização.
 
-            Arqueiro arq2 = new Arqueiro();
-            arq2.setNome("Rodrigo Theodisio Dewes");
-            arq2.setDataNascimento(LocalDate.of(1987, 3, 15));
-            arq2.setCategoria("Composto Open Paralimpico");
-            arq2.setClube("LA Archery - São Paulo (SP)");
+            Arqueiro arq1 = new Arqueiro(
+                    null,
+                    "Igor Agiani Silva",
+                    LocalDate.of(1994, 6, 17),
+                    "Composto Open Paralimpico",
+                    "LA Archery - São Paulo (SP)");
+
+            Arqueiro arq2 = new Arqueiro(null,
+                    "Rodrigo Theodisio Dewes",
+                    LocalDate.of(1987, 3, 15),
+                    "Composto Open Paralimpico",
+                    "LA Archery - São Paulo (SP)");
 
             arqueiroRepository.saveAll(Arrays.asList(arq1, arq2));
         };

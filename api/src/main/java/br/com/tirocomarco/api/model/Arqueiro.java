@@ -4,13 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data // Lombok: Gera Getters, Setters, toString, equals e hashCode.
-@NoArgsConstructor // Lombok: Gera um construtor sem argumentos (obrigatório para o JPA).
+@NoArgsConstructor // Gera um construtor sem argumentos (obrigatório para o JPA).
+@AllArgsConstructor // Gera um construtor com todos os argumentos.
 @Entity // JPA: Indica que esta classe é uma entidade persistente.
 public class Arqueiro {
 
