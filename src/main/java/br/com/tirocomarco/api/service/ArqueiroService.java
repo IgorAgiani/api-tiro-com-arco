@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // Indica que esta classe é um serviço do Spring.
 public class ArqueiroService {
 
-    @Autowired
+    @Autowired // Injeção de dependências, cria instância de ArqueiroRepository.
     private ArqueiroRepository arqueiroRepository;
 
     public List<Arqueiro> listarTodos() {
@@ -19,11 +19,11 @@ public class ArqueiroService {
     }
 
     public Arqueiro criar(Arqueiro novoArqueiro) {
-        return arqueiroRepository.save(novoArqueiro); // Salva o arqueiro no banco de dados e retorna o objeto salvo (com ID gerado).
+        return arqueiroRepository.save(novoArqueiro); // Salva o arqueiro no banco de dados e retorna o objeto salvo.
     }
 
     public Optional<Arqueiro> buscarPorId(Long id) {
-        return arqueiroRepository.findById(id);
+        return arqueiroRepository.findById(id); // Retorna um Optional contendo o arqueiro se encontrado, ou vazio se não encontrado.
     }
 
     public Optional<Arqueiro> atualizarCompleto(Long id, Arqueiro arqueiroAtualizado) {
@@ -31,7 +31,7 @@ public class ArqueiroService {
             return Optional.empty();
         }
         arqueiroAtualizado.setId(id);
-        return Optional.of(arqueiroRepository.save(arqueiroAtualizado));
+        return Optional.of(arqueiroRepository.save(arqueiroAtualizado)); // Salva o arqueiro atualizado e retorna um Optional contendo o objeto salvo.
     }
 
     public boolean deletarPorId(Long id) {
@@ -39,7 +39,7 @@ public class ArqueiroService {
             return false;
         }
         arqueiroRepository.deleteById(id);
-        return true;
+        return true; // Retorna true se o arqueiro foi deletado, false se não foi encontrado.
     }
 
     public Optional<Arqueiro> atualizarParcial(Long id, Arqueiro dadosParciais) {
@@ -58,7 +58,6 @@ public class ArqueiroService {
                         arqueiroExistente.setClube(dadosParciais.getClube());
                     }
                     return arqueiroRepository.save(arqueiroExistente);
-                });
+                }); // Retorna um Optional contendo o arqueiro atualizado ou vazio se não encontrado.
     }
-
 }
