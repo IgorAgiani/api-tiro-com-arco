@@ -1,69 +1,63 @@
-# API de Gestão de Arqueiros 
+# Archery Squad Management API
 
-Este projeto é uma API REST para o gerenciamento de atletas de tiro com arco, desenvolvido como um projeto de estudo para a construção de APIs com Spring Boot. A aplicação implementa um CRUD completo para a entidade `Arqueiro`, seguindo as melhores práticas de arquitetura em camadas (Controller, Service, Repository).
+> API RESTful robusta para gestão de atletas de alta performance, desenvolvida com a stack moderna do ecossistema Spring.
 
----
-## Funcionalidades
+## Sobre o Projeto
+Como atleta da **Seleção Brasileira de Tiro com Arco**, identifiquei a necessidade de sistemas organizados para gestão de dados esportivos. Este projeto une minha experiência no esporte com a engenharia de software.
 
-A API oferece um conjunto completo de operações CRUD para a entidade `Arqueiro`:
-
-- ✅ **Listagem de todos os arqueiros:** `GET /arqueiros`
-- ✅ **Busca de um arqueiro por ID:** `GET /arqueiros/{id}`
-- ✅ **Cadastro de um novo arqueiro:** `POST /arqueiros`
-    - Inclui validação de dados para garantir a integridade das informações.
-    - Retorna o status `201 Created` com a localização do novo recurso.
-- ✅ **Atualização completa de um arqueiro:** `PUT /arqueiros/{id}`
-- ✅ **Atualização parcial de um arqueiro:** `PATCH /arqueiros/{id}`
-- ✅ **Deleção de um arqueiro:** `DELETE /arqueiros/{id}`
-- ✅ **Documentação interativa da API:** Acesso via Swagger UI.
+Trata-se de uma API Backend completa que gerencia o ciclo de vida dos dados dos arqueiros, garantindo integridade, validação e exposição clara dos recursos através de documentação via Swagger. O foco aqui não é apenas o CRUD, mas a aplicação de **Clean Architecture**, **Verbos HTTP Semânticos** e **Boas Práticas de REST**.
 
 ---
 
-## Tecnologias Utilizadas
+## Tecnologias & Arquitetura
 
-Este projeto foi construído utilizando as seguintes tecnologias e bibliotecas:
-
-* **Linguagem:** Java 21
-* **Framework:** Spring Boot 3.5.7
-* **Persistência de Dados:** Spring Data JPA
-* **Banco de Dados:** H2 Database (em memória)
-* **Gerenciamento de Dependências:** Maven
-* **Documentação:** Springdoc OpenAPI (Swagger UI)
-* **Qualidade de Código:** Project Lombok
+* **Core:** Java 21 (LTS) & Spring Boot 3.5.7
+* **Arquitetura:** Camadas bem definidas (Controller, Service, Repository, DTOs).
+* **Persistência:** Spring Data JPA.
+    * *Nota: Utiliza H2 Database (In-Memory) por padrão para facilitar a execução e testes de recrutadores/desenvolvedores, sem necessidade de configuração de ambiente externo.*
+* **Documentação:** OpenAPI 3.0 (Swagger UI).
+* **Produtividade:** Project Lombok para redução de boilerplate.
+* **Build:** Maven.
 
 ---
 
-## Como Executar o Projeto
+## Funcionalidades (Endpoints)
 
-Para executar este projeto localmente, siga os passos abaixo.
+A API segue estritamente o modelo de maturidade de Richardson nível 2:
 
-**Pré-requisitos:**
-* JDK 21 ou superior instalado.
-* Apache Maven 3.8 ou superior instalado.
+| Método | Endpoint | Descrição | Status Sucesso |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/arqueiros` | Lista todos os atletas ativos. | `200 OK` |
+| `GET` | `/arqueiros/{id}` | Busca detalhada de um atleta. | `200 OK` |
+| `POST` | `/arqueiros` | Cria novo registro com validação de campos. | `201 Created` |
+| `PUT` | `/arqueiros/{id}` | Atualização completa do recurso. | `200 OK` |
+| `DELETE` | `/arqueiros/{id}` | Remoção de registro da base. | `204 No Content` |
+
+---
+
+## Como Rodar Localmente
+
+A aplicação foi desenhada para ser "Plug & Play".
 
 1.  **Clone o repositório:**
-    ```sh
-    git clone https://github.com/IgorAgiani/api-tiro-com-arco.git
+    ```bash
+    git clone [https://github.com/IgorAgiani/api-tiro-com-arco.git](https://github.com/IgorAgiani/api-tiro-com-arco.git)
+    cd api-tiro-com-arco
     ```
 
-2.  **Navegue até a pasta raiz do projeto:**
-    ```sh
-    cd api-tiro-com-arco 
-    ```
-
-3.  **Execute a aplicação utilizando o Maven:**
-    ```sh
+2.  **Execute via Maven Wrapper (ou Maven local):**
+    ```bash
     mvn spring-boot:run
     ```
 
-4.  A aplicação iniciará e estará disponível em `http://localhost:8080`.
+3.  **Acesse a Documentação (Swagger):**
+    Abra o navegador em: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+    *Lá você poderá testar todas as requisições diretamente pela interface visual.*
 
 ---
 
-## Documentação e Testes
-
-A documentação completa e interativa dos endpoints foi gerada com o Swagger UI e pode ser acessada no seguinte endereço após a inicialização da aplicação:
-
-[**http://localhost:8080/swagger-ui.html**](http://localhost:8080/swagger-ui.html)
-
-Através desta interface, é possível visualizar todos os detalhes dos endpoints e testar cada uma das operações diretamente pelo navegador.
+## Próximos Passos (Roadmap)
+Para evoluir esta aplicação para um ambiente de produção real (Cloud), os seguintes passos estão mapeados:
+- [ ] Implementar **Spring Security** (OAuth2/JWT) para proteção dos endpoints.
+- [ ] Migrar banco de dados para **PostgreSQL** via **Docker Compose**.
+- [ ] Adicionar testes de integração com **Testcontainers**.
