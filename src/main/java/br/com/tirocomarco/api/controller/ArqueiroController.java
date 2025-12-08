@@ -39,10 +39,12 @@ public class ArqueiroController {
                 .map(arqueiro -> ResponseEntity.ok(arqueiro)) // Se o Optional contiver um arqueiro, retorna 200 OK com ele.
                 .orElse(ResponseEntity.notFound().build());    // Se o Optional estiver vazio, retorna 404 Not Found.
     }
+    
     @Operation(summary = "Cria um novo arqueiro", description = "Cria um novo arqueiro no sistema, com todos os campos são obrigatórios.")
     @ApiResponse(responseCode = "201", description = "Arqueiro criado com sucesso", content = @Content(schema = @Schema(implementation = Arqueiro.class))) // Descreve a resposta 201 Created.
     @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos no corpo da requisição", content = @Content) // Descreve a resposta 400 Bad Request.
     @PostMapping // Mapeia requisições POST.
+    @Valid // Valida o corpo da requisição.
     public ResponseEntity<Arqueiro> criar(@RequestBody Arqueiro novoArqueiro) {
         Arqueiro arqueiroSalvo = arqueiroService.criar(novoArqueiro);
 
@@ -59,6 +61,7 @@ public class ArqueiroController {
     @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos") // Descreve a resposta 400 Bad Request.
     @ApiResponse(responseCode = "404", description = "Arqueiro não encontrado") // Descreve a resposta 404 Not Found.
     @PutMapping("/{id}") // Mapeia requisições PUT que contenham um ID na URL.
+    @Valid // Valida o corpo da requisição.
     public ResponseEntity<Arqueiro> atualizarCompleto(@PathVariable Long id, @RequestBody Arqueiro arqueiroAtualizado) {
         return arqueiroService.atualizarCompleto(id, arqueiroAtualizado)
                 .map(ResponseEntity::ok)
