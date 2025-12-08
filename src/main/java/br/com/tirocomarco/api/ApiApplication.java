@@ -30,7 +30,8 @@ public class ApiApplication {
                     "Composto Open Paralimpico",
                     "LA Archery - São Paulo (SP)");
 
-            Arqueiro arq2 = new Arqueiro(null,
+            Arqueiro arq2 = new Arqueiro(
+                    null,
                     "Rodrigo Theodisio Dewes",
                     LocalDate.of(1987, 3, 15),
                     "Composto Open Paralimpico",
