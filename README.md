@@ -1,11 +1,11 @@
-# Archery Squad Management API
+# Gestão de Arqueiros API
 
-> API RESTful robusta para gestão de atletas de alta performance, desenvolvida com a stack moderna do ecossistema Spring.
+> API RESTful robusta para gestão de atletas, desenvolvida com o ecossistema Spring.
 
 ## Sobre o Projeto
-Como atleta da **Seleção Brasileira de Tiro com Arco**, identifiquei a necessidade de sistemas organizados para gestão de dados esportivos. Este projeto une minha experiência no esporte com a engenharia de software.
+Para fugir dos exemplos genéricos (como "To-do List"), utilizei minha vivência como ex Atleta da Seleção Brasileira de Tiro com Arco como domínio do problema. O desafio proposto foi criar um backend para gerenciar atletas, simulando um cenário real onde a integridade dos dados e a clareza da API são prioritárias.
 
-Trata-se de uma API Backend completa que gerencia o ciclo de vida dos dados dos arqueiros, garantindo integridade, validação e exposição clara dos recursos através de documentação via Swagger. O foco aqui não é apenas o CRUD, mas a aplicação de **Clean Architecture**, **Verbos HTTP Semânticos** e **Boas Práticas de REST**.
+Trata-se de uma API Backend completa que gerencia os dados dos arqueiros, garantindo integridade, validação e exposição clara dos recursos através de documentação via Swagger. O foco aqui não é apenas o CRUD, mas a aplicação de **Clean Architecture**, **Verbos HTTP Semânticos** e **Boas Práticas de REST**.
 
 ---
 
@@ -13,8 +13,8 @@ Trata-se de uma API Backend completa que gerencia o ciclo de vida dos dados dos 
 
 * **Core:** Java 21 (LTS) & Spring Boot 3.5.7
 * **Arquitetura:** Camadas bem definidas (Controller, Service, Repository, DTOs).
-* **Persistência:** Spring Data JPA.
-    * *Nota: Utiliza H2 Database (In-Memory) por padrão para facilitar a execução e testes de recrutadores/desenvolvedores, sem necessidade de configuração de ambiente externo.*
+* **Persistência:** PostgreSQL via Docker Compose.
+* **Validação:** Hibernate Validator (Bean Validation).
 * **Documentação:** OpenAPI 3.0 (Swagger UI).
 * **Produtividade:** Project Lombok para redução de boilerplate.
 * **Build:** Maven.
@@ -41,11 +41,15 @@ A aplicação foi desenhada para ser "Plug & Play".
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/IgorAgiani/api-tiro-com-arco.git](https://github.com/IgorAgiani/api-tiro-com-arco.git)
-    cd api-tiro-com-arco
+    git clone https://github.com/IgorAgiani/api-tiro-com-arco.git
     ```
 
-2.  **Execute via Maven Wrapper (ou Maven local):**
+2. **Suba a Infraestrutura (Banco de Dados):**
+   ```bash
+   docker-compose up -d
+   ```
+
+3.  **Inicie a Aplicação:**
     ```bash
     mvn spring-boot:run
     ```
@@ -59,5 +63,4 @@ A aplicação foi desenhada para ser "Plug & Play".
 ## Próximos Passos (Roadmap)
 Para evoluir esta aplicação para um ambiente de produção real (Cloud), os seguintes passos estão mapeados:
 - [ ] Implementar **Spring Security** (OAuth2/JWT) para proteção dos endpoints.
-- [ ] Migrar banco de dados para **PostgreSQL** via **Docker Compose**.
 - [ ] Adicionar testes de integração com **Testcontainers**.
