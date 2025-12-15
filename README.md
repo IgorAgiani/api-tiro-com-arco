@@ -63,4 +63,4 @@ A aplicação foi desenhada para ser "Plug & Play".
 ## Próximos Passos (Roadmap)
 Para evoluir esta aplicação para um ambiente de produção real (Cloud), os seguintes passos estão mapeados:
 - [ ] Implementar **Spring Security** (OAuth2/JWT) para proteção dos endpoints.
-- [ ] Adicionar testes de integração com **Testcontainers**.
+- [ ] Adicionar testes com JUnit e Mockito.
